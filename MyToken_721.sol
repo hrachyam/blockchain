@@ -20,7 +20,9 @@ contract MyToken_721 is ERC721, ERC721URIStorage, Ownable {
     function safeMint(address to, string memory uri) public payable {
         uint mintCount = minters[msg.sender];
         if (mintCount > 9) {
-            require( msg.value == TOKEN_PRICE, "Token price is 0.01 ether");
+            require(msg.value == TOKEN_PRICE, "Token price is 0.01 ether");
+        } else {
+            require(msg.value == 0, "For 10 Tokens there is no cost");
         }
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(to, tokenId);
